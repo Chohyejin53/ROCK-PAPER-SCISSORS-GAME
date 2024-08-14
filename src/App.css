@@ -1,9 +1,13 @@
+body {
+  width: 100%;
+}
 .wrapper {
   display: flex;
   flex-direction: column;
-  width: 1200px;
+  width: 750px;
   margin: 0 auto;
   padding: 10px;
+  box-sizing: border-box;
 }
 
 .title {
@@ -22,8 +26,8 @@
 .box {
   border-radius: 25px;
   padding: 10px;
-  width: 500px;
-  height: 500px;
+  width: 250px;
+  height: 400px;
   margin: 0 10px;
   box-sizing: border-box;
 }
@@ -82,4 +86,58 @@
   font-weight: bold;
   font-size: 20px;
   color: #fff;
+}
+
+/* 반응형 미디어 쿼리 */
+@media (max-width: 750px) {
+  .wrapper {
+    width: 100%;
+    min-width: 320px;
+    max-width: 375px;
+    height: 100vh;
+    padding: 5px;
+  }
+
+  .title {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .container {
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: auto;
+    margin-bottom: auto;
+    margin: 0;
+  }
+
+  .box .title {
+    font-size: 20px;
+  }
+
+  .result-text {
+    font-size: 20px;
+    margin: 0;
+  }
+
+  .btn_box {
+    flex-direction: row;
+    margin-top: 10px;
+  }
+
+  .btn_box button {
+    width: 60px;
+    height: 60px;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
 }

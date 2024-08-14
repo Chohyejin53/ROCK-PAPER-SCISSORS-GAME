@@ -21,8 +21,8 @@ const Box = (props) => {
           (props.item && props.item.name) ||
           "https://www.practiceportuguese.com/wp-content/uploads/2020/06/asking-questions.jpg"
         }
-        width={300}
-        height={300}
+        width={150}
+        height={150}
       />
       <p className="result-text">{props.result}</p>
     </div>
