@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { Component } from "react";
 import "./App.css";
 import Box from "./component/Box";
 
@@ -24,19 +24,29 @@ const choice = {
   },
 };
 
-function App() {
-  const [userSelect, setUserSelect] = useState(null);
-  const [ComputerSelect, setComputerSelect] = useState(null);
-  const [result, setResult] = useState("");
+export default class AppClass extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userSelect: null,
+      computerSelect: null,
+      result: "",
+    };
+  }
 
-  const play = (userChoice) => {
-    setUserSelect(choice[userChoice]);
-    const computerChoice = randomChoice();
-    setComputerSelect(computerChoice);
-    setResult(judgement(choice[userChoice], computerChoice));
+  play = (userChoice) => {
+    const userSelect = choice[userChoice];
+    const computerSelect = this.randomChoice();
+    const result = this.judgement(userSelect, computerSelect);
+
+    this.setState({
+      userSelect: userSelect,
+      computerSelect: computerSelect,
+      result: result,
+    });
   };
 
-  const judgement = (user, computer) => {
+  judgement = (user, computer) => {
     const userWin = { user: "win", computer: "lose" };
     const userLose = { user: "lose", computer: "win" };
     const userTie = { user: "tie", computer: "tie" };
@@ -52,33 +62,35 @@ function App() {
     }
   };
 
-  const randomChoice = () => {
-    const itemArray = Object.keys(choice); // 객체에 있는 키값만 뽑아서 배열로 만들어주는 함수
+  randomChoice = () => {
+    const itemArray = Object.keys(choice);
     const randomItem = Math.floor(Math.random() * itemArray.length);
     const final = itemArray[randomItem];
     return choice[final];
   };
 
-  return (
-    <>
-      <div className="wrapper">
-        <h1 className="title">ROCK-PAPER-SCISSORS GAME</h1>
-        <div className="container">
-          <Box title={"YOU"} item={userSelect} result={result.user} />
-          <Box
-            title={"COMPUTER"}
-            item={ComputerSelect}
-            result={result.computer}
-          />
-        </div>
-        <div className="btn_box">
-          <button onClick={() => play("scissors")}>가위</button>
-          <button onClick={() => play("rock")}>바위</button>
-          <button onClick={() => play("paper")}>보</button>
-        </div>
-      </div>
-    </>
-  );
-}
+  render() {
+    const { userSelect, computerSelect, result } = this.state;
 
-export default App;
+    return (
+      <>
+        <div className="wrapper">
+          <h1 className="title">ROCK-PAPER-SCISSORS GAME</h1>
+          <div className="container">
+            <Box title={"YOU"} item={userSelect} result={result.user} />
+            <Box
+              title={"COMPUTER"}
+              item={computerSelect}
+              result={result.computer}
+            />
+          </div>
+          <div className="btn_box">
+            <button onClick={() => this.play("scissors")}>가위</button>
+            <button onClick={() => this.play("rock")}>바위</button>
+            <button onClick={() => this.play("paper")}>보</button>
+          </div>
+        </div>
+      </>
+    );
+  }
+}

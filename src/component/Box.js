@@ -1,32 +1,33 @@
-import React from "react";
+import React, { Component } from "react";
 
-const Box = (props) => {
-  const getResultClass = () => {
-    return props.result === "win"
+export default class Box extends Component {
+  getResultClass = () => {
+    return this.props.result === "win"
       ? "color-green"
-      : props.result === "lose"
+      : this.props.result === "lose"
       ? "color-red"
       : "color-black";
   };
 
-  return (
-    <div className={`box ${getResultClass()}`}>
-      <h1 className="title">{props.title}</h1>
-      <img
-        src={
-          (props.item && props.item.img) ||
-          "https://www.practiceportuguese.com/wp-content/uploads/2020/06/asking-questions.jpg"
-        }
-        alt={
-          (props.item && props.item.name) ||
-          "https://www.practiceportuguese.com/wp-content/uploads/2020/06/asking-questions.jpg"
-        }
-        width={150}
-        height={150}
-      />
-      <p className="result-text">{props.result}</p>
-    </div>
-  );
-};
-
-export default Box;
+  render() {
+    const { title, item, result } = this.props;
+    return (
+      <div className={`box ${this.getResultClass()}`}>
+        <h1 className="title">{title}</h1>
+        <img
+          src={
+            (item && item.img) ||
+            "https://www.practiceportuguese.com/wp-content/uploads/2020/06/asking-questions.jpg"
+          }
+          alt={
+            (item && item.name) ||
+            "https://www.practiceportuguese.com/wp-content/uploads/2020/06/asking-questions.jpg"
+          }
+          width={150}
+          height={150}
+        />
+        <p className="result-text">{result}</p>
+      </div>
+    );
+  }
+}
